@@ -1,0 +1,10 @@
+- name: Cloud Functions Deploy
+  uses: google-github-actions/deploy-cloud-functions@v0.1.2
+  
+steps:
+- id: deploy
+  uses: google-github-actions/deploy-cloud-functions@main
+  with:
+    name: gcr.io/bensnyde-me/website
+    runtime: nodejs10
+    credentials: ${{ secrets.gcp_credentials }}
