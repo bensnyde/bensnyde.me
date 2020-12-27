@@ -1,0 +1,10 @@
+- name: Cloud Functions Deploy
+  uses: google-github-actions/deploy-cloudrun@main
+  
+steps:
+- id: deploy
+  uses: google-github-actions/deploy-cloudrun@main
+  with:
+    image: gcr.io/bensnyde-me/website
+    service: static-website
+    credentials: ${{ secrets.gcp_credentials }}  
