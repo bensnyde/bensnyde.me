@@ -20,6 +20,3 @@ jobs:
           image: gcr.io/bensnyde-me/website
           service: static-website
           credentials: ${{ secrets.gcp_credentials }}  
-
-      - name: test
-        run: curl "${{ steps.deploy.outputs.url }}"
