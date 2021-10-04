@@ -16,6 +16,6 @@ jobs:
       - name: deploy
         uses: google-github-actions/deploy-cloudrun@main
         with:
-          image: gcr.io/bensnyde-me/website
+          image: us.gcr.io/bensnyde-me/website
           service: static-website
           credentials: ${{ secrets.gcp_credentials }}  
