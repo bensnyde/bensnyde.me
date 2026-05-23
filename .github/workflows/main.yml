@@ -23,10 +23,10 @@ jobs:
         with:
           credentials_json: ${{ secrets.gcp_credentials }}
 
-      - name: Login to Artifact Registry
+      - name: Login to Container Registry
         uses: docker/login-action@v3
         with:
-          registry: us-central1-docker.pkg.dev
+          registry: us.gcr.io
           username: _json_key
           password: ${{ secrets.gcp_credentials }}
 
@@ -39,15 +39,15 @@ jobs:
           context: .
           push: true
           tags: |
-            us-central1-docker.pkg.dev/bensnyde-me/website/website:${{ github.sha }}
-            us-central1-docker.pkg.dev/bensnyde-me/website/website:latest
+            us.gcr.io/bensnyde-me/website:${{ github.sha }}
+            us.gcr.io/bensnyde-me/website:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v3
         with:
-          image: us-central1-docker.pkg.dev/bensnyde-me/website/website:${{ github.sha }}
+          image: us.gcr.io/bensnyde-me/website:${{ github.sha }}
           service: static-website
           region: us-central1
           project_id: bensnyde-me
