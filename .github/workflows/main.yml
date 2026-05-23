@@ -18,18 +18,10 @@ jobs:
         with:
           credentials_json: ${{ secrets.gcp_credentials }}
 
-      - name: configure docker
-        run: gcloud auth configure-docker us.gcr.io --quiet
-
-      - name: build and push image
-        run: |
-          docker build -t us.gcr.io/bensnyde-me/website:${{ github.sha }} .
-          docker push us.gcr.io/bensnyde-me/website:${{ github.sha }}
-
       - name: deploy
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          image: us.gcr.io/bensnyde-me/website:${{ github.sha }}
+          image: us.gcr.io/bensnyde-me/website
           service: static-website
           region: us-central1
           project_id: bensnyde-me
